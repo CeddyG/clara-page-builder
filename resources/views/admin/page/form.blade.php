@@ -152,7 +152,7 @@
                 <div class="box-body">
                     
 
-                    {!! BootForm::text(__('page.title_page'), 'title_page') !!}
+                    {!! BootForm::text(__('clara-page::page.title_page'), 'title_page') !!}
 
                     @if(isset($oItem))
                         {!! BootForm::select(__('page-category.page_category'), 'fk_page_category')
@@ -173,7 +173,7 @@
                         ]) !!}
                     @endif
 
-                    {!! BootForm::text(__('page.url_page'), 'url_page') !!}
+                    {!! BootForm::text(__('clara-page::page.url_page'), 'url_page') !!}
                     
                     @if(isset($oItem))
                         <textarea name="content_page" id="content_page" class="hidden">{!! $oItem->content_page !!}</textarea>
@@ -189,7 +189,7 @@
         <div class="col-sm-12">
             <div class="box box-info">	
                 <div class="box-header with-border">
-                    <h3 class="box-title">{{ __('page.template') }}</h3>
+                    <h3 class="box-title">{{ __('clara-page::page.template') }}</h3>
                 </div>
                 <div class="box-body"> 
                     <div class="col-sm-2 template bg-navy" id="template-row">
@@ -220,7 +220,7 @@
         <div class="col-sm-12">
             <div class="box box-info">	
                 <div class="box-header with-border">
-                    <h3 class="box-title">{{ __('page.content') }}</h3>
+                    <h3 class="box-title">{{ __('clara-page::page.content') }}</h3>
                 </div>
                 <div class="box-body"> 
                     @if(isset($oItem))
@@ -247,10 +247,10 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('general.close') }}">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">{{ __('page.modal_row_title') }}</h4>
+                    <h4 class="modal-title">{{ __('clara-page::page.modal_row_title') }}</h4>
                 </div>
                 <div class="modal-body">
-                    @include('admin.page.partials.settings', ['sType' => 'row'])
+                    @include('clara-page::admin.page.partials.settings', ['sType' => 'row'])
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('general.close') }}</button>
@@ -270,20 +270,20 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('general.close') }}">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">{{ __('page.modal_col_title') }}</h4>
+                    <h4 class="modal-title">{{ __('clara-page::page.modal_col_title') }}</h4>
                 </div>
                 <div class="modal-body">
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#tab_1" data-toggle="tab">{{ __('page.size') }}</a></li>
-                                <li><a href="#tab_2" data-toggle="tab">{{ __('page.advanced') }}</a></li>
+                                <li class="active"><a href="#tab_1" data-toggle="tab">{{ __('clara-page::page.size') }}</a></li>
+                                <li><a href="#tab_2" data-toggle="tab">{{ __('clara-page::page.advanced') }}</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab_1">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-6">
-                                            <h4 class="text-center">{{ __('page.width') }}</h4>
+                                            <h4 class="text-center">{{ __('clara-page::page.width') }}</h4>
                                             {!! BootForm::inputGroup('X-Small', 'xs-size')
                                                 ->type('text')
                                                 ->class('slider slider-size')
@@ -310,7 +310,7 @@
                                         </div>
                                         
                                         <div class="col-xs-12 col-sm-6">
-                                            <h4 class="text-center">{{ __('page.offset') }}</h4>
+                                            <h4 class="text-center">{{ __('clara-page::page.offset') }}</h4>
                                             {!! BootForm::inputGroup('X-Small', 'xs-offset')
                                                 ->type('text')
                                                 ->class('slider slider-offset')
@@ -339,7 +339,7 @@
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="tab_2">
-                                    @include('admin.page.partials.settings', ['sType' => 'col'])
+                                    @include('clara-page::admin.page.partials.settings', ['sType' => 'col'])
                                 </div>
                                 <!-- /.tab-pane -->
                             </div>
@@ -365,13 +365,13 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('general.close') }}">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">{{ __('page.modal_text_title') }}</h4>
+                    <h4 class="modal-title">{{ __('clara-page::page.modal_text_title') }}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#tab_3" data-toggle="tab">{{ __('page.text') }}</a></li>
-                                <li><a href="#tab_4" data-toggle="tab">{{ __('page.advanced') }}</a></li>
+                                <li class="active"><a href="#tab_3" data-toggle="tab">{{ __('clara-page::page.text') }}</a></li>
+                                <li><a href="#tab_4" data-toggle="tab">{{ __('clara-page::page.advanced') }}</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab_3">
@@ -379,7 +379,7 @@
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="tab_4">
-                                    @include('admin.page.partials.settings', ['sType' => 'text'])
+                                    @include('clara-page::admin.page.partials.settings', ['sType' => 'text'])
                                 </div>
                                 <!-- /.tab-pane -->
                             </div>
@@ -400,24 +400,24 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('general.close') }}">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('clara-page::general.close') }}">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">{{ __('page.modal_image_title') }}</h4>
+                    <h4 class="modal-title">{{ __('clara-page::page.modal_image_title') }}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#tab_5" data-toggle="tab">{{ __('page.image') }}</a></li>
-                                <li><a href="#tab_6" data-toggle="tab">{{ __('page.advanced') }}</a></li>
+                                <li class="active"><a href="#tab_5" data-toggle="tab">{{ __('clara-page::page.image') }}</a></li>
+                                <li><a href="#tab_6" data-toggle="tab">{{ __('clara-page::page.advanced') }}</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab_5">
-                                    {!! BootForm::text(__('page.url'), 'image_url') !!}
+                                    {!! BootForm::text(__('clara-page::page.url'), 'image_url') !!}
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="tab_6">
-                                    @include('admin.page.partials.settings', ['sType' => 'image'])
+                                    @include('clara-page::admin.page.partials.settings', ['sType' => 'image'])
                                 </div>
                                 <!-- /.tab-pane -->
                             </div>
@@ -441,7 +441,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('general.close') }}">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">{{ __('page.modal_data_title') }}</h4>
+                    <h4 class="modal-title">{{ __('clara-page::page.modal_data_title') }}</h4>
                 </div>
                 <div class="modal-body">
                     <p>One fine body&hellip;</p>

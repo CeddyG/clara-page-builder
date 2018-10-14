@@ -6,8 +6,14 @@
 return [
     
     'route' => [
-        'prefix'    => 'admin',
-        'middleware' => ['web', 'access']
+        'web' => [
+            'prefix'    => 'admin',
+            'middleware' => ['web', 'access']
+        ],
+        'api' => [
+            'prefix'    => 'admin',
+            'middleware' => ['api', 'access']
+        ]
     ],
     
     'slider' => [

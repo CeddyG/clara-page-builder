@@ -2,13 +2,15 @@
 
 namespace CeddyG\ClaraPageBuilder\Http\Controllers;
 
-use Facades\App\Repositories\PageRepository;
+use App\Http\Controllers\Controller;
+
+use CeddyG\ClaraPageBuilder\Repositories\PageRepository;
 
 class PageController extends Controller
 {
-    public function show($sSlug)
+    public function show(PageRepository $oRepository, $sSlug)
     {
-        $oPage = PageRepository::getFillFromView('abricot/page/show')
+        $oPage = $oRepository->getFillFromView('abricot/page/show')
             ->findByField('url_page', $sSlug)
             ->first();
         
@@ -16,7 +18,7 @@ class PageController extends Controller
         {
             $sTitlePage = $oPage->title_page;
 
-            return view('abricot/page/show', compact('oPage', 'sTitlePage'));
+            return view('clara-page::show', compact('oPage', 'sTitlePage'));
         }
         else
         {
