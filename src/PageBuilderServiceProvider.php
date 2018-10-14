@@ -80,5 +80,9 @@ class PageBuilderServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . '/../config/clara.navbar.php', 'clara.navbar'
         );
+        
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/clara.page-category.php', 'clara.page-category'
+        );
     }
 }

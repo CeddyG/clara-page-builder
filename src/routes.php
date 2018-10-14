@@ -17,11 +17,11 @@ Route::group(['prefix' => config('clara.page.route.api.prefix'), 'middleware' =>
 //Category
 Route::group(['prefix' => config('clara.page-category.route.web.prefix'), 'middleware' => config('clara.page-category.route.web.middleware')], function()
 {
-    Route::resource('page-category', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController', ['names' => 'admin.page-category']);
+    Route::resource('page-category', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageCategoryController', ['names' => 'admin.page-category']);
 });
 
-Route::group(['prefix' => config('clara.page.route.api.prefix'), 'middleware' => config('clara.page-category.route.api.middleware')], function()
+Route::group(['prefix' => config('clara.page-category.route.api.prefix'), 'middleware' => config('clara.page-category.route.api.middleware')], function()
 {
-    Route::get('page-category/index/ajax', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController@indexAjax')->name('admin.page-category.index.ajax');
-	Route::get('page-category/select/ajax', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController@selectAjax')->name('admin.page-category.select.ajax');
+    Route::get('page-category/index/ajax', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageCategoryController@indexAjax')->name('admin.page-category.index.ajax');
+	Route::get('page-category/select/ajax', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageCategoryController@selectAjax')->name('admin.page-category.select.ajax');
 });
