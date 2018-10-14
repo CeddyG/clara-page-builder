@@ -10,9 +10,9 @@ class PageCategoryController extends ContentManagerController
 {
     public function __construct(PageCategoryRepository $oRepository)
     {
-        $this->sPath            = 'admin/page-category';
+        $this->sPath            = 'clara-page::admin.page-category';
         $this->sPathRedirect    = 'admin/page-category';
-        $this->sName            = __('page-category.page_category');
+        $this->sName            = __('clara-page::page-category.page_category');
         
         $this->oRepository  = $oRepository;
         $this->sRequest     = 'CeddyG\ClaraPageBuilder\Http\Requests\PageCategoryRequest';
