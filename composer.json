@@ -1,0 +1,27 @@
+{
+    "name": "ceddyg/clara-page-builder",
+    "description": "Page builer using bootstrap for Clara.",
+    "keywords": ["laravel", "clara", "page", "builder", "bootstrap"],
+    "authors": [
+        {
+            "name": "CeddyG"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "~5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "CeddyG\\ClaraPageBuilder\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CeddyG\\ClaraPageBuilder\\PageBuilderServiceProvider"
+            ]
+        }
+    }
+}
