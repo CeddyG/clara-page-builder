@@ -3,6 +3,9 @@
 @section('CSS')
     <!-- Select 2 -->
     {!! Html::style('bower_components/select2/dist/css/select2.min.css') !!}
+    
+    <!-- YesNoBtn -->
+    {!! Html::style('adminlte/css/alt/yesno-btn.css') !!}
 
     <style>
         .select2
@@ -42,7 +45,8 @@
                         {!! BootForm::open()->action( route('admin.page-category.store') )->post() !!}
                     @endif
 
-                        {!! BootForm::text(trans('clara-page::page-category.name_page_category'), 'name_page_category') !!}
+                    {!! BootForm::text(__('clara-page::page-category.name_page_category'), 'name_page_category') !!}
+                    {!! BootForm::yesNo(__('clara-page::page-category.enable_page_category'), 'enable_page_category') !!}
 
                     {!! BootForm::submit('Envoyer', 'btn-primary')->addClass('pull-right') !!}
 

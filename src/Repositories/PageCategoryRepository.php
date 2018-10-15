@@ -17,7 +17,8 @@ class PageCategoryRepository extends QueryBuilderRepository
     ];
 
     protected $aFillable = [
-        'name_page_category'
+        'name_page_category',
+        'enable_page_category'
     ];
     
    

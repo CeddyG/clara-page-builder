@@ -13,6 +13,7 @@ return [
     */
     'page_category'         => 'Category',
     'name_page_category'    => 'Name page category',
+    'enable_page_category'  => 'Enable',
     'created_at'            => 'Created at',
     'updated_at'            => 'Updated at'
 ];

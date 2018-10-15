@@ -22,7 +22,9 @@ class PageRepository extends QueryBuilderRepository
 		'fk_users',
 		'title_page',
 		'url_page',
-		'content_page'
+		'template',
+		'content_page',
+		'enable_page'
     ];
     
    
@@ -35,6 +37,4 @@ class PageRepository extends QueryBuilderRepository
     {
         return $this->belongsTo('App\Repositories\UsersRepository', 'fk_users');
     }
-
-
 }

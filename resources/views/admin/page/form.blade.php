@@ -9,6 +9,9 @@
     
     <!-- bootstrap slider -->
     {!! Html::style('adminlte/plugins/bootstrap-slider/slider.css') !!}
+    
+    <!-- YesNoBtn -->
+    {!! Html::style('adminlte/css/alt/yesno-btn.css') !!}
 
     <style>
         .input-group-addon:hover
@@ -155,7 +158,7 @@
                     {!! BootForm::text(__('clara-page::page.title_page'), 'title_page') !!}
 
                     @if(isset($oItem))
-                        {!! BootForm::select(__('page-category.page_category'), 'fk_page_category')
+                        {!! BootForm::select(__('clara-page::page-category.page_category'), 'fk_page_category')
                             ->class('select2 form-control')
                             ->options([$oItem->fk_page_category => $oItem->page_category->name_page_category])
                             ->data([
@@ -164,7 +167,7 @@
                                 'field'         => 'name_page_category'
                         ]) !!}
                     @else
-                        {!! BootForm::select(__('page-category.page_category'), 'fk_page_category')
+                        {!! BootForm::select(__('clara-page::page-category.page_category'), 'fk_page_category')
                             ->class('select2 form-control')
                             ->data([
                                 'url-select'    => route('admin.page-category.select.ajax'), 
@@ -174,6 +177,8 @@
                     @endif
 
                     {!! BootForm::text(__('clara-page::page.url_page'), 'url_page') !!}
+                    {!! BootForm::yesNo(__('clara-page::page.global_template'), 'template') !!}
+                    {!! BootForm::yesNo(__('clara-page::page.enable_page'), 'enable_page') !!}
                     
                     @if(isset($oItem))
                         <textarea name="content_page" id="content_page" class="hidden">{!! $oItem->content_page !!}</textarea>

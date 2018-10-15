@@ -43,7 +43,9 @@ class PageRequest extends FormRequest
             'fk_users' => 'numeric',
             'title_page' => 'string|max:45',
             'url_page' => 'string|max:255',
+            'template' => 'numeric',
             'content_page' => '',
+            'enable_page' => 'numeric',
             'created_at' => 'string',
             'updated_at' => 'string'
         ];

@@ -26,6 +26,7 @@ class PageCategoryRequest extends FormRequest
         return [
             'id_page_category' => 'numeric',
             'name_page_category' => 'string|max:45',
+            'enable_page_category' => 'numeric',
             'created_at' => 'string',
             'updated_at' => 'string'
         ];
