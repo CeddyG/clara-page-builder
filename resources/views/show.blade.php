@@ -1,4 +1,4 @@
-@extends('abricot/main')
+@extends('abricot/layout')
 
 @section('CSS')
     <style>
