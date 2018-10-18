@@ -268,6 +268,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('general.close') }}</button>
+                    <button type="button" class="btn btn-danger delete-element">{{ __('general.delete') }}</button>
                     <button type="button" class="btn btn-primary" id="submit-modal-row">{{ __('general.save') }}</button>
                 </div>
             </div>
@@ -363,6 +364,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('general.close') }}</button>
+                    <button type="button" class="btn btn-danger delete-element">{{ __('general.delete') }}</button>
                     <button type="button" class="btn btn-primary" id="submit-modal-col">{{ __('general.save') }}</button>
                 </div>
             </div>
@@ -401,6 +403,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('general.close') }}</button>
+                    <button type="button" class="btn btn-danger delete-element">{{ __('general.delete') }}</button>
                     <button type="button" class="btn btn-primary" id="submit-modal-text">{{ __('general.save') }}</button>
                 </div>
             </div>
@@ -439,6 +442,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('general.close') }}</button>
+                    <button type="button" class="btn btn-danger delete-element">{{ __('general.delete') }}</button>
                     <button type="button" class="btn btn-primary" id="submit-modal-image">{{ __('general.save') }}</button>
                 </div>
             </div>
@@ -462,6 +466,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('general.close') }}</button>
+                    <button type="button" class="btn btn-danger delete-element">{{ __('general.delete') }}</button>
                     <button type="button" class="btn btn-primary">{{ __('general.save') }}</button>
                 </div>
             </div>
@@ -1120,6 +1125,13 @@
                     }
                 }
             }
+            
+            $('.delete-element').on('click', function(){
+                oCurrentElement.remove();
+                
+                copyContent();
+                $(this).closest('.modal').modal('hide');
+            });
             
             function copyContent()
             {
