@@ -485,21 +485,7 @@
     
     <!-- Bootstrap slider -->
     {!! Html::script('adminlte/plugins/bootstrap-slider/bootstrap-slider.js') !!}
-    
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#from-template').on('change', function(){
-                var sRoute = '{{ route('api.admin.page.select-template.show', 'dummyId') }}';
-                sRoute = sRoute.replace('dummyId', $(this).val());
-                
-                $.get(sRoute, function( data ) {
-                    $('#content-zone').html(data.content);
-                    $('#content_page').html(data.content);
-                }, 'json');
-            });
-        });
-    </script>
-    
+        
     <script type="text/javascript">
         $(document).ready(function() {
             $('.select2').wrap('<div class="input-group input-group-select2"></div>');
@@ -775,38 +761,62 @@
                         $(ui.item).sortable({
                             revert: true,
                             update: function(event, ui) {
-                                if (!$(ui.item).hasClass('col'))
-                                {
-                                    $(ui.item).html('');
-                                    $(ui.item).attr('class', '');
-                                    $(ui.item).removeAttr('style');
-                                    $(ui.item).addClass('col col-xs-3 template-container');
-                                    $(ui.item).droppable({
-                                        accept: ".template-content",
-                                        drop : function(ev, template){
-
-                                            switch (template.draggable.attr('id'))
-                                            {
-                                                case 'template-text':
-                                                    $(this).append('<div class="template-content-render template-content-text"></div>');
-                                                    break;
-
-                                                case 'template-image':
-                                                    $(this).append('<div class="template-content-render template-content-image"><img src="" /></div>');
-                                                    break;
-
-                                                case 'template-data':
-                                                    $(this).append('<div class="template-content-render template-content-data"></div>');
-                                                    break;
-                                            }                                    
-                                        }
-                                    });
-                                }
+                                sortableCol(ui);
                             }
                         });
                     }
                 }
             }).disableSelection();
+            
+            $('#from-template').on('change', function(){
+                var sRoute = '{{ route('api.admin.page.select-template.show', 'dummyId') }}';
+                sRoute = sRoute.replace('dummyId', $(this).val());
+                
+                $.get(sRoute, function( data ) {
+                    $('#content-zone').html(data.content);
+                    $('#content_page').html(data.content);
+                    
+                    $('#content-zone .row').each(function (){
+                        $(this).sortable({
+                            revert: true,
+                            update: function(event, ui) {
+                                sortableCol(ui);
+                            }
+                        });
+                    });
+                }, 'json');
+            });
+            
+            function sortableCol(ui) 
+            {
+                if (!$(ui.item).hasClass('col'))
+                {
+                    $(ui.item).html('');
+                    $(ui.item).attr('class', '');
+                    $(ui.item).removeAttr('style');
+                    $(ui.item).addClass('col col-xs-3 template-container');
+                    $(ui.item).droppable({
+                        accept: ".template-content",
+                        drop : function(ev, template){
+
+                            switch (template.draggable.attr('id'))
+                            {
+                                case 'template-text':
+                                    $(this).append('<div class="template-content-render template-content-text"></div>');
+                                    break;
+
+                                case 'template-image':
+                                    $(this).append('<div class="template-content-render template-content-image"><img src="" /></div>');
+                                    break;
+
+                                case 'template-data':
+                                    $(this).append('<div class="template-content-render template-content-data"></div>');
+                                    break;
+                            }                                    
+                        }
+                    });
+                }
+            }
             
             $('#content-zone').on('click', '.row', function(e){
                 if (e.target !== this)
