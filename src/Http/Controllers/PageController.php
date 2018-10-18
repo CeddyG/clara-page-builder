@@ -10,7 +10,7 @@ class PageController extends Controller
 {
     public function show(PageRepository $oRepository, $sSlug)
     {
-        $oPage = $oRepository->getFillFromView('abricot/page/show')
+        $oPage = $oRepository->getFillFromView('clara-page::show')
             ->findByField('url_page', $sSlug)
             ->first();
         
