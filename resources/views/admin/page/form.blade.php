@@ -135,10 +135,10 @@
 
 @section('content')
     @if(isset($oItem))
-        {!! BootForm::open()->action( route('admin.page.update', $oItem->id_page) )->put() !!}
+        {!! BootForm::open()->action(route('admin.page.update', $oItem->id_page))->put() !!}
         {!! BootForm::bind($oItem) !!}
     @else
-        {!! BootForm::open()->action( route('admin.page.store') )->post() !!}
+        {!! BootForm::open()->action(route('admin.page.store'))->post() !!}
     @endif
     
     <div class="row">
@@ -162,7 +162,7 @@
                             ->class('select2 form-control')
                             ->options([$oItem->fk_page_category => $oItem->page_category->name_page_category])
                             ->data([
-                                'url-select'    => route('admin.page-category.select.ajax'), 
+                                'url-select'    => route('api.admin.page-category.select'), 
                                 'url-create'    => route('admin.page-category.create'),
                                 'field'         => 'name_page_category'
                         ]) !!}
@@ -170,13 +170,22 @@
                         {!! BootForm::select(__('clara-page::page-category.page_category'), 'fk_page_category')
                             ->class('select2 form-control')
                             ->data([
-                                'url-select'    => route('admin.page-category.select.ajax'), 
+                                'url-select'    => route('api.admin.page-category.select'), 
                                 'url-create'    => route('admin.page-category.create'),
                                 'field'         => 'name_page_category'
                         ]) !!}
                     @endif
 
                     {!! BootForm::text(__('clara-page::page.url_page'), 'url_page') !!}
+                    
+                    {!! BootForm::select('A partir du modèle', 'from-template')
+                        ->class('select2 form-control')
+                        ->data([
+                            'url-select'    => route('api.admin.page.select-template'), 
+                            'url-create'    => route('admin.page.create'),
+                            'field'         => 'title_page'
+                    ]) !!}
+                    
                     {!! BootForm::yesNo(__('clara-page::page.global_template'), 'template') !!}
                     {!! BootForm::yesNo(__('clara-page::page.enable_page'), 'enable_page') !!}
                     
@@ -213,9 +222,9 @@
                         IMAGE
                     </div>
 
-                    <div class="col-sm-2 draggable template template-content bg-yellow" id="template-data">
+                    <!--<div class="col-sm-2 draggable template template-content bg-yellow" id="template-data">
                         DATA
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -476,6 +485,20 @@
     
     <!-- Bootstrap slider -->
     {!! Html::script('adminlte/plugins/bootstrap-slider/bootstrap-slider.js') !!}
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#from-template').on('change', function(){
+                var sRoute = '{{ route('api.admin.page.select-template.show', 'dummyId') }}';
+                sRoute = sRoute.replace('dummyId', $(this).val());
+                
+                $.get(sRoute, function( data ) {
+                    $('#content-zone').html(data.content);
+                    $('#content_page').html(data.content);
+                }, 'json');
+            });
+        });
+    </script>
     
     <script type="text/javascript">
         $(document).ready(function() {

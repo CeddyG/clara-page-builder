@@ -52,7 +52,7 @@
             $('#tab-admin').DataTable({
                 serverSide: true,
                 ajax: {
-                    'url': '{{ route('admin.page.index.ajax') }}'
+                    'url': '{{ route('api.admin.page.index') }}'
                 },
                 columns: [
                     { 'data': 'id_page' },

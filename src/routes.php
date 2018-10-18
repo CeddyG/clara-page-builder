@@ -10,8 +10,10 @@ Route::group(['prefix' => config('clara.page.route.web.prefix'), 'middleware' =>
 
 Route::group(['prefix' => config('clara.page.route.api.prefix'), 'middleware' => config('clara.page.route.api.middleware')], function()
 {
-    Route::get('page/index/ajax', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController@indexAjax')->name('admin.page.index.ajax');
-	Route::get('page/select/ajax', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController@selectAjax')->name('admin.page.select.ajax');
+    Route::get('page/index', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController@indexAjax')->name('api.admin.page.index');
+	Route::get('page/select', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController@selectAjax')->name('api.admin.page.select');
+	Route::get('page/select-template', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController@selectTemplateAjax')->name('api.admin.page.select-template');
+	Route::get('page/select-template/{iIdTemplate}', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController@showTemplateAjax')->name('api.admin.page.select-template.show');
 });
 
 //Category
@@ -22,6 +24,6 @@ Route::group(['prefix' => config('clara.page-category.route.web.prefix'), 'middl
 
 Route::group(['prefix' => config('clara.page-category.route.api.prefix'), 'middleware' => config('clara.page-category.route.api.middleware')], function()
 {
-    Route::get('page-category/index/ajax', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageCategoryController@indexAjax')->name('admin.page-category.index.ajax');
-	Route::get('page-category/select/ajax', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageCategoryController@selectAjax')->name('admin.page-category.select.ajax');
+    Route::get('page-category/index', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageCategoryController@indexAjax')->name('api.admin.page-category.index');
+	Route::get('page-category/select', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageCategoryController@selectAjax')->name('api.admin.page-category.select');
 });
