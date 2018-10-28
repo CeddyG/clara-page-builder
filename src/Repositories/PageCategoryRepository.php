@@ -13,19 +13,29 @@ class PageCategoryRepository extends QueryBuilderRepository
     protected $sDateFormatToGet = 'd/m/Y';
     
     protected $aRelations = [
-        'page'
+        'page',
+        'active_page'
     ];
 
     protected $aFillable = [
         'name_page_category',
         'enable_page_category'
     ];
-    
    
     public function page()
     {
         return $this->hasMany('CeddyG\ClaraPageBuilder\Repositories\PageRepository', 'fk_page_category');
     }
 
-
+    public function active_page()
+    {
+        return $this->hasMany(
+            'CeddyG\ClaraPageBuilder\Repositories\PageRepository', 
+            'fk_page_category', 
+            [
+                'enable_page' => 1,
+                'template' => 0,
+            ]
+        );
+    }
 }
