@@ -51,7 +51,7 @@
             $('#tab-admin').DataTable({
                 serverSide: true,
                 ajax: {
-                    'url': '{{ route('admin.page-category.index.ajax') }}'
+                    'url': '{{ route('api.admin.page-category.index') }}'
                 },
                 columns: [
                     { 'data': 'id_page_category' },
