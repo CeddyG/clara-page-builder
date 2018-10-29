@@ -23,5 +23,7 @@
 @stop
 
 @section('content')
-    {!! $oPage->content_page !!}
+    <div class="container">
+        {!! $oPage->content_page !!}
+    </div>
 @stop
