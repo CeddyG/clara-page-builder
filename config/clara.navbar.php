@@ -3,10 +3,10 @@
 return [
     
     [
-        'Pages',
+        'clara-page::page.page',
         [
-            'page'          => 'List',
-            'page-category' => 'Category'
+            'page'          => 'clara-page::page.list',
+            'page-category' => 'clara-page::page.fk_page_category'
         ]
     ]
     
