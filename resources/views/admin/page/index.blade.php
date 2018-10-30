@@ -26,6 +26,7 @@
                 <tr>
                     <th>ID</th>
                     <th>{{ __('clara-page::page.title_page') }}</th>
+                    <th>{{ __('clara-page::page.fk_page_category') }}</th>
 					<th>{{ __('clara-page::page.url_page') }}</th>
                     <th></th>
                     <th></th>
@@ -49,6 +50,7 @@
     
     <script type="text/javascript">
         $(document).ready(function() {
+            $.fn.dataTable.ext.errMode = 'none';
             $('#tab-admin').DataTable({
                 serverSide: true,
                 ajax: {
@@ -57,6 +59,10 @@
                 columns: [
                     { 'data': 'id_page' },
                     { 'data': 'title_page' },
+                    { 
+                        'data': 'category_name',
+                        'name': 'page_category.name_page_category'
+                    },
 					{ 'data': 'url_page' },
                     {
                         "data": "id_page",
