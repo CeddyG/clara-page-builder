@@ -1,9 +1,10 @@
 <?php
 
 //Page
-Route::get('page/{slug}', 'CeddyG\ClaraPageBuilder\Http\Controllers\PageController@show');
+Route::get('page/{slug}', 'CeddyG\ClaraPageBuilder\Http\Controllers\PageController@show')
+    ->middleware(config('clara.page.route.web.middleware'));
 
-Route::group(['prefix' => config('clara.page.route.web.prefix'), 'middleware' => config('clara.page.route.web.middleware')], function()
+Route::group(['prefix' => config('clara.page.route.web-admin.prefix'), 'middleware' => config('clara.page.route.web-admin.middleware')], function()
 {
     Route::resource('page', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController', ['names' => 'admin.page']);
 });
