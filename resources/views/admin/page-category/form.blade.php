@@ -104,16 +104,6 @@
                 them: 'bootstrap'
             });
         } );
-    </script> 
-
-    {!! Html::script('bower_components/ckeditor/ckeditor.js') !!}
-    
-    <script>
-        $(function () {
-          // Replace the <textarea id="editor1"> with a CKEditor
-          // instance, using default configuration.
-          CKEDITOR.replace('.ckeditor');
-        });
     </script>
 
 @stop
