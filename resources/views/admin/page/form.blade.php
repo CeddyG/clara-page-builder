@@ -491,7 +491,7 @@
     <!-- Bootstrap slider -->
     {!! Html::script('adminlte/plugins/bootstrap-slider/bootstrap-slider.js') !!}
         
-    <script type="text/javascript">
+    <script>
         $(document).ready(function() {
             $('.select2').wrap('<div class="input-group input-group-select2"></div>');
             $( ".input-group-select2" ).each(function () {
@@ -539,7 +539,7 @@
         });    
     </script>
             
-    <script type="text/javascript">
+    <script>
         $(document).ready(function() {
             var oCurrentElement = null;
             var aClassNoRemove  = [
@@ -547,6 +547,7 @@
                 'col',
                 'template-container',
                 'ui-droppable',
+                'ui-sortable',
                 'template-content-render',
                 'template-content-text',
                 'template-content-image',
@@ -781,16 +782,27 @@
                     $('#content-zone').html(data.content);
                     $('#content_page').html(data.content);
                     
-                    $('#content-zone .row').each(function (){
-                        $(this).sortable({
-                            revert: true,
-                            update: function(event, ui) {
-                                sortableCol(ui);
-                            }
-                        });
-                    });
+                    initContent();
                 }, 'json');
             });
+            
+            initContent();
+            
+            function initContent()
+            {
+                $('#content-zone .row').each(function (){
+                    $(this).sortable({
+                        revert: true,
+                        update: function(event, ui) {
+                            sortableCol(ui);
+                        }
+                    }).disableSelection();
+                });
+
+                $('#content-zone .row .col').each(function (){
+                    droppableCol($(this));
+                });
+            }
             
             function sortableCol(ui) 
             {
@@ -800,27 +812,32 @@
                     $(ui.item).attr('class', '');
                     $(ui.item).removeAttr('style');
                     $(ui.item).addClass('col col-xs-3 template-container');
-                    $(ui.item).droppable({
-                        accept: ".template-content",
-                        drop : function(ev, template){
-
-                            switch (template.draggable.attr('id'))
-                            {
-                                case 'template-text':
-                                    $(this).append('<div class="template-content-render template-content-text"></div>');
-                                    break;
-
-                                case 'template-image':
-                                    $(this).append('<div class="template-content-render template-content-image"><img src="" /></div>');
-                                    break;
-
-                                case 'template-data':
-                                    $(this).append('<div class="template-content-render template-content-data"></div>');
-                                    break;
-                            }                                    
-                        }
-                    });
+                    droppableCol($(ui.item));
                 }
+            }
+            
+            function droppableCol(oItem)
+            {
+                oItem.droppable({
+                    accept: ".template-content",
+                    drop : function(ev, template){
+
+                        switch (template.draggable.attr('id'))
+                        {
+                            case 'template-text':
+                                $(this).append('<div class="template-content-render template-content-text"></div>');
+                                break;
+
+                            case 'template-image':
+                                $(this).append('<div class="template-content-render template-content-image"><img src="" /></div>');
+                                break;
+
+                            case 'template-data':
+                                $(this).append('<div class="template-content-render template-content-data"></div>');
+                                break;
+                        }                                    
+                    }
+                });
             }
             
             $('#content-zone').on('click', '.row', function(e){
@@ -1127,7 +1144,14 @@
             }
             
             $('.delete-element').on('click', function(){
-                oCurrentElement.remove();
+                if (oCurrentElement.is('img'))
+                {
+                    oCurrentElement.parent().remove();
+                }
+                else
+                {
+                    oCurrentElement.remove();
+                }
                 
                 copyContent();
                 $(this).closest('.modal').modal('hide');
@@ -1135,7 +1159,10 @@
             
             function copyContent()
             {
-                $('#content_page').html($('#content-zone').html());
+                var sHtml   = $('#content-zone').html().replace('ui-droppable', '');
+                sHtml       = sHtml.replace('ui-sortable', '');
+                
+                $('#content_page').html(sHtml);
             }
         });
     </script> 
