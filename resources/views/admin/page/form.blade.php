@@ -190,9 +190,9 @@
                     {!! BootForm::yesNo(__('clara-page::page.enable_page'), 'enable_page') !!}
                     
                     @if(isset($oItem))
-                        <textarea name="content_page" id="content_page" class="hidden">{!! $oItem->content_page !!}</textarea>
+                        <textarea name="content_page" id="content_page" class="hidden">{!! old('content_page', $oItem->content_page) !!}</textarea>
                     @else
-                        <textarea name="content_page" id="content_page" class="hidden"></textarea>
+                        <textarea name="content_page" id="content_page" class="hidden">{!! old('content_page') !!}</textarea>
                     @endif
                 </div>
             </div>
@@ -237,15 +237,10 @@
                     <h3 class="box-title">{{ __('clara-page::page.content') }}</h3>
                 </div>
                 <div class="box-body"> 
-                    @if(isset($oItem))
-                        <div id="content-zone">{!! $oItem->content_page !!}</div>
-                    @else
-                        <div id="content-zone"></div>
-                    @endif
+                    <div id="content-zone"></div>
                     
                     {!! BootForm::submit(__('general.send'), 'btn-primary')->addClass('pull-right') !!}
 
-                    
                 </div>
             </div>
             <a href="javascript:history.back()" class="btn btn-primary">
@@ -548,11 +543,14 @@
                 'template-container',
                 'ui-droppable',
                 'ui-sortable',
+                'ui-sortable-handle',
                 'template-content-render',
                 'template-content-text',
                 'template-content-image',
                 'template-content-data'
             ];
+            
+            $('#content-zone').html($('#content_page').val());
             
             function buildModalRow()
             {
@@ -672,9 +670,10 @@
                     for(var i = 0; i < nbStyle; i++)
                     {
                         aCurrentStyle = aStyle[i].split(':');
+                        aCurrentStyle = [aCurrentStyle.shift(), aCurrentStyle.join(':')];
                         if (aCurrentStyle[0] != '' && aCurrentStyle[1] != '')
                         {
-                            oSettingStyle.append(buildStyleSetting(aCurrentStyle[0], aCurrentStyle[1]));
+                            oSettingStyle.append(buildStyleSetting(aCurrentStyle[0].trim(), aCurrentStyle[1].trim()));
                         }
                     }
                 }
@@ -1159,8 +1158,9 @@
             
             function copyContent()
             {
-                var sHtml   = $('#content-zone').html().replace('ui-droppable', '');
-                sHtml       = sHtml.replace('ui-sortable', '');
+                var sHtml   = $('#content-zone').html().replace(/ ui-droppable/gi, '');
+                sHtml       = sHtml.replace(/ ui-sortable-handle/gi, '');
+                sHtml       = sHtml.replace(/ ui-sortable/gi, '');
                 
                 $('#content_page').html(sHtml);
             }
