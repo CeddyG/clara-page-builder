@@ -2,7 +2,7 @@
 
 namespace CeddyG\ClaraPageBuilder\Http\Controllers\Admin;
 
-use App\Http\Controllers\ContentManagerController;
+use CeddyG\Clara\Http\Controllers\ContentManagerController;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
