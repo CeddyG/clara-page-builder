@@ -239,12 +239,12 @@
                 <div class="box-body"> 
                     <div id="content-zone"></div>
                     
-                    {!! BootForm::submit(__('general.send'), 'btn-primary')->addClass('pull-right') !!}
+                    {!! BootForm::submit(__('clara::general.send'), 'btn-primary')->addClass('pull-right') !!}
 
                 </div>
             </div>
             <a href="javascript:history.back()" class="btn btn-primary">
-                <span class="glyphicon glyphicon-circle-arrow-left"></span> {{ __('general.return') }}
+                <span class="glyphicon glyphicon-circle-arrow-left"></span> {{ __('clara::general.return') }}
             </a>
         </div>
     </div>
@@ -253,7 +253,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('general.close') }}">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('clara::general.close') }}">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title">{{ __('clara-page::page.modal_row_title') }}</h4>
@@ -262,9 +262,9 @@
                     @include('clara-page::admin.page.partials.settings', ['sType' => 'row'])
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('general.close') }}</button>
-                    <button type="button" class="btn btn-danger delete-element">{{ __('general.delete') }}</button>
-                    <button type="button" class="btn btn-primary" id="submit-modal-row">{{ __('general.save') }}</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('clara::general.close') }}</button>
+                    <button type="button" class="btn btn-danger delete-element">{{ __('clara::general.delete') }}</button>
+                    <button type="button" class="btn btn-primary" id="submit-modal-row">{{ __('clara::general.save') }}</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -277,7 +277,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('general.close') }}">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('clara::general.close') }}">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title">{{ __('clara-page::page.modal_col_title') }}</h4>
@@ -358,9 +358,9 @@
                         <!-- nav-tabs-custom -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('general.close') }}</button>
-                    <button type="button" class="btn btn-danger delete-element">{{ __('general.delete') }}</button>
-                    <button type="button" class="btn btn-primary" id="submit-modal-col">{{ __('general.save') }}</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('clara::general.close') }}</button>
+                    <button type="button" class="btn btn-danger delete-element">{{ __('clara::general.delete') }}</button>
+                    <button type="button" class="btn btn-primary" id="submit-modal-col">{{ __('clara::general.save') }}</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -373,7 +373,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('general.close') }}">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('clara::general.close') }}">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title">{{ __('clara-page::page.modal_text_title') }}</h4>
@@ -397,9 +397,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('general.close') }}</button>
-                    <button type="button" class="btn btn-danger delete-element">{{ __('general.delete') }}</button>
-                    <button type="button" class="btn btn-primary" id="submit-modal-text">{{ __('general.save') }}</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('clara::general.close') }}</button>
+                    <button type="button" class="btn btn-danger delete-element">{{ __('clara::general.delete') }}</button>
+                    <button type="button" class="btn btn-primary" id="submit-modal-text">{{ __('clara::general.save') }}</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -412,7 +412,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('clara-page::general.close') }}">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('clara-page::clara::general.close') }}">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title">{{ __('clara-page::page.modal_image_title') }}</h4>
@@ -436,9 +436,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('general.close') }}</button>
-                    <button type="button" class="btn btn-danger delete-element">{{ __('general.delete') }}</button>
-                    <button type="button" class="btn btn-primary" id="submit-modal-image">{{ __('general.save') }}</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('clara::general.close') }}</button>
+                    <button type="button" class="btn btn-danger delete-element">{{ __('clara::general.delete') }}</button>
+                    <button type="button" class="btn btn-primary" id="submit-modal-image">{{ __('clara::general.save') }}</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -451,7 +451,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('general.close') }}">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('clara::general.close') }}">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title">{{ __('clara-page::page.modal_data_title') }}</h4>
@@ -460,9 +460,9 @@
                     <p>One fine body&hellip;</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('general.close') }}</button>
-                    <button type="button" class="btn btn-danger delete-element">{{ __('general.delete') }}</button>
-                    <button type="button" class="btn btn-primary">{{ __('general.save') }}</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('clara::general.close') }}</button>
+                    <button type="button" class="btn btn-danger delete-element">{{ __('clara::general.delete') }}</button>
+                    <button type="button" class="btn btn-primary">{{ __('clara::general.save') }}</button>
                 </div>
             </div>
             <!-- /.modal-content -->
