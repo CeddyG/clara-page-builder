@@ -55,7 +55,10 @@
                 },
                 columns: [
                     { 'data': 'id_page_category' },
-                    { 'data': 'name_page_category' },
+                    { 
+                        'data': 'text_name_page_category',
+                        'name': 'text.name_page_category'
+                    },
                     {
                         "data": "id_page_category",
                         "render": function ( data, type, row, meta ) {

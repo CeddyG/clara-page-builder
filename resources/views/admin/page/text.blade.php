@@ -1,0 +1,1 @@
+{!! BootForm::text(__('page-category-text.name_page_category'), 'page_category_text['.$iIdView.'][name_page_category]') !!}

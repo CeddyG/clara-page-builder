@@ -18,7 +18,6 @@ class PageCategoryRepository extends QueryBuilderRepository
     ];
 
     protected $aFillable = [
-        'name_page_category',
         'enable_page_category'
     ];
    
@@ -37,5 +36,15 @@ class PageCategoryRepository extends QueryBuilderRepository
                 'template' => 0,
             ]
         );
+    }
+
+    public function page_category_text()
+    {
+        return $this->hasMany('CeddyG\ClaraPageBuilder\Repositories\PageCategoryTextRepository', 'fk_page_category');
+    }
+
+    public function text()
+    {
+        return $this->hasMany('CeddyG\ClaraPageBuilder\Repositories\PageCategoryTextRepository', 'fk_page_category', [['fk_lang', '=', ClaraLang::getIdByCode(App::getLocale())]]);
     }
 }

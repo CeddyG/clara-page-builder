@@ -8,6 +8,12 @@ use CeddyG\ClaraPageBuilder\Repositories\PageCategoryRepository;
 
 class PageCategoryController extends ContentManagerController
 {
+    protected $sEventBeforeStore    = \CeddyG\ClaraPageBuilder\Events\PageCategory\BeforeStoreEvent::class;
+    protected $sEventAfterStore     = \CeddyG\ClaraPageBuilder\Events\PageCategory\AfterStoreEvent::class;
+    protected $sEventBeforeUpdate   = \CeddyG\ClaraPageBuilder\Events\PageCategory\BeforeUpdateEvent::class;
+    protected $sEventAfterUpdate    = \CeddyG\ClaraPageBuilder\Events\PageCategory\AfterUpdateEvent::class;
+    protected $sEventBeforeDestroy  = \CeddyG\ClaraPageBuilder\Events\PageCategory\BeforeDestroyEvent::class;
+    
     public function __construct(PageCategoryRepository $oRepository)
     {
         $this->sPath            = 'clara-page::admin.page-category';
