@@ -20,7 +20,9 @@ class PageCategoryTextRepository extends QueryBuilderRepository
         'fk_page_category',
         'fk_lang',
         'name_page_category'
-    ];    
+    ];
+    
+    protected $bTimestamp = true; 
    
     public function page_category()
     {

@@ -27,6 +27,7 @@ class PageRepository extends QueryBuilderRepository
 		'enable_page'
     ];
     
+    protected $bTimestamp = true;    
    
     public function page_category()
     {

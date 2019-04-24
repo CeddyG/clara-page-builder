@@ -25,6 +25,8 @@ class PageCategoryRepository extends QueryBuilderRepository
     protected $aFillable = [
         'enable_page_category'
     ];
+    
+    protected $bTimestamp = true;
    
     public function page()
     {

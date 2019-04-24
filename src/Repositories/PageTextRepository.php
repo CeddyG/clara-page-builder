@@ -27,6 +27,7 @@ class PageTextRepository extends QueryBuilderRepository
         'js_page'
     ];
     
+    protected $bTimestamp = true;
    
     public function page()
     {
