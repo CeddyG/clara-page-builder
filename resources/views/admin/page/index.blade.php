@@ -59,12 +59,12 @@
                 columns: [
                     { 'data': 'id_page' },
                     { 
-                        'data': 'text_name_page',
-                        'name': 'text.name_page'
+                        'data': 'text_title_page',
+                        'name': 'text.title_page'
                     },
                     { 
                         'data': 'category_name',
-                        'name': 'page_category.name_page_category'
+                        'name': 'page_category.page_category_trans.name_page_category'
                     },
 					{ 
                         'data': 'text_url_page',

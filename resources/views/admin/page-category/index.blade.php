@@ -57,7 +57,7 @@
                     { 'data': 'id_page_category' },
                     { 
                         'data': 'text_name_page_category',
-                        'name': 'text.name_page_category'
+                        'name': 'page_category_trans.name_page_category'
                     },
                     {
                         "data": "id_page_category",

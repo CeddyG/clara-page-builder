@@ -17,7 +17,9 @@ class PageCategoryRepository extends QueryBuilderRepository
     
     protected $aRelations = [
         'page',
-        'active_page'
+        'active_page',
+        'page_category_text',
+        'page_category_trans'
     ];
 
     protected $aFillable = [
@@ -46,7 +48,7 @@ class PageCategoryRepository extends QueryBuilderRepository
         return $this->hasMany('CeddyG\ClaraPageBuilder\Repositories\PageCategoryTextRepository', 'fk_page_category');
     }
 
-    public function text()
+    public function page_category_trans()
     {
         return $this->hasMany('CeddyG\ClaraPageBuilder\Repositories\PageCategoryTextRepository', 'fk_page_category', [['fk_lang', '=', ClaraLang::getIdByCode(App::getLocale())]]);
     }

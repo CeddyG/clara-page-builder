@@ -45,7 +45,7 @@
                         {!! BootForm::open()->action( route('admin.page-category.store') )->post() !!}
                     @endif
 
-                    {!! BootForm::text(__('clara-page::page-category.name_page_category'), 'name_page_category') !!}
+                    {!! BootForm::viewTabPane('clara-page::admin.page-category.text', ClaraLang::getActiveLang()) !!}
                     {!! BootForm::yesNo(__('clara-page::page-category.enable_page_category'), 'enable_page_category') !!}
 
                     {!! BootForm::submit('Envoyer', 'btn-primary')->addClass('pull-right') !!}
