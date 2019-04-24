@@ -4,6 +4,7 @@ namespace CeddyG\ClaraPageBuilder\Repositories;
 
 use CeddyG\QueryBuilderRepository\QueryBuilderRepository;
 
+use App;
 use ClaraLang;
 
 class PageRepository extends QueryBuilderRepository
