@@ -39,10 +39,12 @@
                 </div>
                 <div class="box-body"> 
                     @if(isset($oItem))
-                        {!! BootForm::open()->action( route('admin.page-category.update', $oItem->id_page_category) )->put() !!}
+                        @php $oItem->page_category_text = $oItem->page_category_text->keyBy('fk_lang')->toArray() @endphp
+                    
+                        {!! BootForm::open()->action(route('admin.page-category.update', $oItem->id_page_category))->put() !!}
                         {!! BootForm::bind($oItem) !!}
                     @else
-                        {!! BootForm::open()->action( route('admin.page-category.store') )->post() !!}
+                        {!! BootForm::open()->action(route('admin.page-category.store'))->post() !!}
                     @endif
 
                     {!! BootForm::viewTabPane('clara-page::admin.page-category.text', ClaraLang::getActiveLang()) !!}

@@ -18,14 +18,12 @@ class PageCategoryTextRepository extends QueryBuilderRepository
 
     protected $aFillable = [
         'fk_page_category',
+        'fk_lang',
         'name_page_category'
-    ];
-    
+    ];    
    
     public function page_category()
     {
         return $this->belongsTo('CeddyG\ClaraPageBuilder\Repositories\PageCategoryRepository', 'fk_page_category');
     }
-
-
 }

@@ -3,6 +3,8 @@ namespace CeddyG\ClaraPageBuilder;
 
 use Illuminate\Support\ServiceProvider;
 
+use Event;
+
 /**
  * Description of EntityServiceProvider
  *
@@ -21,6 +23,9 @@ class PageBuilderServiceProvider extends ServiceProvider
 		$this->publishesTranslations();
         $this->loadRoutesFrom(__DIR__.'/routes.php');
 		$this->publishesView();
+        
+        Event::subscribe(\CeddyG\ClaraPageBuilder\Listeners\PageTextSubscriber::class);
+        Event::subscribe(\CeddyG\ClaraPageBuilder\Listeners\PageCategoryTextSubscriber::class);
     }
     
     /**

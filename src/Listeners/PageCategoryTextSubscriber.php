@@ -4,7 +4,7 @@ namespace CeddyG\ClaraPageBuilder\Listeners;
 
 use CeddyG\ClaraPageBuilder\Repositories\PageCategoryTextRepository;
 
-class PAgeCategoryTextSubscriber
+class PageCategoryTextSubscriber
 {
     private $oRepository;
     
@@ -71,7 +71,7 @@ class PAgeCategoryTextSubscriber
         
         $oEvent->listen(
             'CeddyG\ClaraPageBuilder\Events\PageCategory\BeforeDestroyEvent',
-            'CeddyG\ClaraPageBuilder\Listeners\PageCategoryTextSubscriber@validate'
+            'CeddyG\ClaraPageBuilder\Listeners\PageCategoryTextSubscriber@delete'
         );
     }
 }

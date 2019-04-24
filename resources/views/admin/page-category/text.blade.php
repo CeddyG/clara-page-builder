@@ -1,1 +1,1 @@
-{!! BootForm::text(__('page-category.name_page_category'), 'page_category_text['.$iIdView.'][name_page_category]') !!}
+{!! BootForm::text(__('clara-page::page-category.name_page_category'), 'page_category_text['.$iIdView.'][name_page_category]') !!}
