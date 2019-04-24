@@ -4,6 +4,8 @@ namespace CeddyG\ClaraPageBuilder\Repositories;
 
 use CeddyG\QueryBuilderRepository\QueryBuilderRepository;
 
+use ClaraLang;
+
 class PageCategoryRepository extends QueryBuilderRepository
 {
     protected $sTable = 'page_category';
