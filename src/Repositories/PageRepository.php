@@ -22,9 +22,15 @@ class PageRepository extends QueryBuilderRepository
 
     protected $aFillable = [
         'fk_page_category',
-		'fk_users',
-		'template',
-		'enable_page'
+        'fk_users',
+        'fk_lang',
+        'title_page',
+        'url_page',
+        'enable_page',
+        'content_page',
+        'description_page',
+        'css_page',
+        'js_page'
     ];
     
     protected $bTimestamp = true;    
@@ -37,15 +43,5 @@ class PageRepository extends QueryBuilderRepository
     public function users()
     {
         return $this->belongsTo('CeddyG\ClaraSentinel\Repositories\UsersRepository', 'fk_users');
-    }
-
-    public function page_text()
-    {
-        return $this->hasMany('CeddyG\ClaraPageBuilder\Repositories\PageTextRepository', 'fk_page');
-    }
-
-    public function text()
-    {
-        return $this->hasMany('CeddyG\ClaraPageBuilder\Repositories\PageTextRepository', 'fk_page', [['fk_lang', '=', ClaraLang::getIdByCode(App::getLocale())]]);
     }
 }

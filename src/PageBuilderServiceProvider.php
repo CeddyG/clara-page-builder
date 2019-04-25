@@ -24,7 +24,6 @@ class PageBuilderServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/routes.php');
 		$this->publishesView();
         
-        Event::subscribe(\CeddyG\ClaraPageBuilder\Listeners\PageTextSubscriber::class);
         Event::subscribe(\CeddyG\ClaraPageBuilder\Listeners\PageCategoryTextSubscriber::class);
     }
     

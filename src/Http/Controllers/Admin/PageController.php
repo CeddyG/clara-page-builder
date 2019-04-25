@@ -10,12 +10,6 @@ use CeddyG\ClaraPageBuilder\Repositories\PageRepository;
 
 class PageController extends ContentManagerController
 {
-    protected $sEventBeforeStore    = \CeddyG\ClaraPageBuilder\Events\Page\BeforeStoreEvent::class;
-    protected $sEventAfterStore     = \CeddyG\ClaraPageBuilder\Events\Page\AfterStoreEvent::class;
-    protected $sEventBeforeUpdate   = \CeddyG\ClaraPageBuilder\Events\Page\BeforeUpdateEvent::class;
-    protected $sEventAfterUpdate    = \CeddyG\ClaraPageBuilder\Events\Page\AfterUpdateEvent::class;
-    protected $sEventBeforeDestroy  = \CeddyG\ClaraPageBuilder\Events\Page\BeforeDestroyEvent::class;
-    
     public function __construct(PageRepository $oRepository)
     {
         $this->sPath            = 'clara-page::admin.page';

@@ -41,11 +41,14 @@ class PageRequest extends FormRequest
             'id_page' => 'numeric',
             'fk_page_category' => 'numeric',
             'fk_users' => 'numeric',
+            'fk_lang' => 'numeric',
             'title_page' => 'string|max:150',
             'url_page' => 'string|max:255',
-            'template' => 'numeric',
-            'content_page' => '',
             'enable_page' => 'numeric',
+            'content_page' => '',
+            'description_page' => '',
+            'css_page' => '',
+            'js_page' => '',
             'created_at' => 'string',
             'updated_at' => 'string'
         ];
