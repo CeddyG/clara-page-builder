@@ -1,5 +1,7 @@
 @extends('admin/dashboard')
 
+@php $aActivelang = ClaraLang::getActiveLang() @endphp
+
 @section('CSS')
     <!-- Select 2 -->
     {!! Html::style('bower_components/select2/dist/css/select2.min.css') !!}
@@ -19,9 +21,19 @@
             color: black;
         }
         
-        #line-template
+        select
         {
-            height: 200px;
+            width: 100%;
+        }
+        
+        textarea
+        {
+            resize: none;
+        }
+        
+        #edit-css-btn
+        {
+            margin-right: 10px;
         }
         
         .template
@@ -143,7 +155,6 @@
     
     <div class="row">
         <div class="col-sm-6">
-            <br>
             <div class="box box-info">	
                 <div class="box-header with-border">
                     @if(isset($oItem))
@@ -154,17 +165,16 @@
                 </div>
                 <div class="box-body">
                     
-
                     {!! BootForm::text(__('clara-page::page.title_page'), 'title_page') !!}
 
                     @if(isset($oItem))
                         {!! BootForm::select(__('clara-page::page-category.page_category'), 'fk_page_category')
                             ->class('select2 form-control')
-                            ->options([$oItem->fk_page_category => $oItem->page_category->name_page_category])
+                            ->options([$oItem->fk_page_category => $oItem->page_category->title_page_category])
                             ->data([
                                 'url-select'    => route('api.admin.page-category.select'), 
                                 'url-create'    => route('admin.page-category.create'),
-                                'field'         => 'name_page_category'
+                                'field'         => 'page_category_trans.name_page_category'
                         ]) !!}
                     @else
                         {!! BootForm::select(__('clara-page::page-category.page_category'), 'fk_page_category')
@@ -172,22 +182,28 @@
                             ->data([
                                 'url-select'    => route('api.admin.page-category.select'), 
                                 'url-create'    => route('admin.page-category.create'),
-                                'field'         => 'name_page_category'
+                                'field'         => 'page_category_trans.name_page_category'
                         ]) !!}
                     @endif
 
-                    {!! BootForm::text(__('clara-page::page.url_page'), 'url_page') !!}
+                    {!! BootForm::select(__('clara-page::page.fk_lang'), 'fk_lang')
+                        ->options($aActivelang)
+                    !!}
                     
-                    {!! BootForm::select('A partir du modèle', 'from-template')
+                    {!! BootForm::text(__('clara-page::page.url_page'), 'url_page') !!}
+                    {!! BootForm::textarea(__('clara-page::page.description_page'), 'description_page')
+                        ->attribute('maxlength', 300)
+                        ->helpBlock('<span id="count_message">0/300</span>') 
+                    !!}
+                    
+                    {!! BootForm::yesNo(__('clara-page::page.enable_page'), 'enable_page') !!}
+                    {!! BootForm::select(__('clara-page::page.from-template'), 'from-template')
                         ->class('select2 form-control')
                         ->data([
-                            'url-select'    => route('api.admin.page.select-template'), 
+                            'url-select'    => route('api.admin.page.select'), 
                             'url-create'    => route('admin.page.create'),
                             'field'         => 'title_page'
                     ]) !!}
-                    
-                    {!! BootForm::yesNo(__('clara-page::page.global_template'), 'template') !!}
-                    {!! BootForm::yesNo(__('clara-page::page.enable_page'), 'enable_page') !!}
                     
                     @if(isset($oItem))
                         <textarea name="content_page" id="content_page" class="hidden">{!! old('content_page', $oItem->content_page) !!}</textarea>
@@ -197,11 +213,53 @@
                 </div>
             </div>
         </div>
+        
+        @if (count($aActivelang) > 1)
+            <div class="col-sm-6">
+                <div class="box box-success">	
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{ __('clara-page::page.multilingual') }}</h3>
+                    </div>
+                    <div class="box-body">
+                        @foreach ($aActivelang as $iIdLang => $sLang)
+                            @if(isset($oItem) && !empty($oItem->page_trans))
+                                {!! BootForm::select($sLang, 'page_trans[]')
+                                    ->id('page-lang-'.$iIdLang)
+                                    ->class('select2 form-control page-lang')
+                                    ->options(
+                                        $oItem
+                                            ->page_trans
+                                            ->where('fk_lang', $iIdLang)
+                                            ->pluck('title_page', 'id_page')
+                                            ->toArray()
+                                    )
+                                    ->data([
+                                        'url-select'    => route('api.admin.page.select-lang'), 
+                                        'url-create'    => route('admin.page.create'),
+                                        'field'         => 'title_page',
+                                        'fk_lang'       => $iIdLang
+                                ]) !!}
+                            @else
+                                {!! BootForm::select($sLang, 'page_trans[]')
+                                    ->id('page-lang-'.$iIdLang)
+                                    ->class('select2 form-control page-lang')
+                                    ->data([
+                                        'url-select'    => route('api.admin.page.select-lang'), 
+                                        'url-create'    => route('admin.page.create'),
+                                        'field'         => 'title_page',
+                                        'fk_lang'       => $iIdLang
+                                ]) !!}
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
       
-    <div class="row" id="line-template">
+    <div class="row">
         <div class="col-sm-12">
-            <div class="box box-info">	
+            <div class="box box-warning">	
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ __('clara-page::page.template') }}</h3>
                 </div>
@@ -229,25 +287,69 @@
             </div>
         </div>
     </div>
-       
+             
     <div class="row">
         <div class="col-sm-12">
-            <div class="box box-info">	
+            <div class="box box-danger">	
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ __('clara-page::page.content') }}</h3>
+                    <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-js">{{ __('clara-page::page.js_page') }}</button>
+                    <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-css" id="edit-css-btn">{{ __('clara-page::page.css_page') }}</button>
                 </div>
                 <div class="box-body"> 
                     <div id="content-zone"></div>
-                    
-                    {!! BootForm::submit(__('clara::general.send'), 'btn-primary')->addClass('pull-right') !!}
-
                 </div>
             </div>
             <a href="javascript:history.back()" class="btn btn-primary">
                 <span class="glyphicon glyphicon-circle-arrow-left"></span> {{ __('clara::general.return') }}
             </a>
+            {!! BootForm::submit(__('clara::general.send'), 'btn-primary')->addClass('pull-right') !!}
         </div>
     </div>
+    
+    <div class="modal fade" id="modal-css">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('clara::general.close') }}">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">{{ __('clara-page::page.css_page') }}</h4>
+                </div>
+                <div class="modal-body">
+                    {!! BootForm::textarea('', 'css_page') !!}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('clara::general.close') }}</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    
+    <div class="modal fade" id="modal-js">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('clara::general.close') }}">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">{{ __('clara-page::page.js_page') }}</h4>
+                </div>
+                <div class="modal-body">
+                    {!! BootForm::textarea('', 'js_page') !!}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ __('clara::general.close') }}</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
     
     <div class="modal fade" id="modal-row">
         <div class="modal-dialog modal-lg">
@@ -502,11 +604,23 @@
                     dataType: 'json',
                     delay: 10,
                     data: function (params) {
-                        return {
-                            q: params.term, // search term
-                            field: $(this).attr('data-field'),
-                            page: params.page
-                        };
+                        if ($(this).hasClass('page-lang'))
+                        {
+                            return {
+                                q: params.term, // search term
+                                field: $(this).attr('data-field'),
+                                fk_lang: $(this).attr('data-fk_lang'),
+                                page: params.page
+                            };
+                        }
+                        else
+                        {
+                            return {
+                                q: params.term, // search term
+                                field: $(this).attr('data-field'),
+                                page: params.page
+                            };                            
+                        }
                     },
                     processResults: function (data, params) {
                         // parse the results into the format expected by Select2.
@@ -526,10 +640,40 @@
                 them: 'bootstrap'
             });
             
+            $('#fk_lang').select2();
+            
+            function disableSelect()
+            {
+                var iIdLang = $('#fk_lang').val();
+                
+                $('.page-lang').prop('disabled', false);
+                
+                $('.page-lang').each(function(){
+                    var iIdPage = $(this).find('option').first().val();
+                    $(this).val(iIdPage).change();
+                });
+                
+                $('#page-lang-'+iIdLang).prop('disabled', true);
+                $('#page-lang-'+iIdLang).val('').change();
+            }
+            
+            disableSelect();
+            
+            $('#fk_lang').on('change', function(){
+                disableSelect();
+            });
+            
             //iCheck for checkbox and radio inputs
             $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
                 checkboxClass: 'icheckbox_minimal-blue',
                 radioClass   : 'iradio_minimal-blue'
+            });
+            
+            //Counter for the description field
+            $('#count_message').html($('#description_page').val().length+'/300');
+
+            $('#description_page').keyup(function() {
+                $('#count_message').html($('#description_page').val().length+'/300');
             });
         });    
     </script>

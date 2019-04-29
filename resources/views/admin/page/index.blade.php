@@ -58,18 +58,12 @@
                 },
                 columns: [
                     { 'data': 'id_page' },
-                    { 
-                        'data': 'text_title_page',
-                        'name': 'text.title_page'
-                    },
+                    { 'data': 'title_page' },
                     { 
                         'data': 'category_name',
                         'name': 'page_category.page_category_trans.name_page_category'
                     },
-					{ 
-                        'data': 'text_url_page',
-                        'name': 'text.url_page'
-                    },
+					{ 'data': 'url_page' },
                     {
                         "data": "id_page",
                         "render": function ( data, type, row, meta ) {

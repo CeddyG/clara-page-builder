@@ -13,7 +13,7 @@ Route::group(['prefix' => config('clara.page.route.api.prefix'), 'middleware' =>
 {
     Route::get('page/index', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController@indexAjax')->name('api.admin.page.index');
 	Route::get('page/select', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController@selectAjax')->name('api.admin.page.select');
-	Route::get('page/select-template', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController@selectTemplateAjax')->name('api.admin.page.select-template');
+	Route::get('page/select-lang', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController@selectLang')->name('api.admin.page.select-lang');
 	Route::get('page/select-template/{iIdTemplate}', 'CeddyG\ClaraPageBuilder\Http\Controllers\Admin\PageController@showTemplateAjax')->name('api.admin.page.select-template.show');
 });
 

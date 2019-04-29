@@ -26,6 +26,17 @@ class PageCategoryRepository extends QueryBuilderRepository
         'enable_page_category'
     ];
     
+    /**
+     * List of the customs attributes.
+     * 
+     * @var array
+     */
+    protected $aCustomAttribute = [
+        'title_page_category' => [
+            'page_category_trans.name_page_category'
+        ]
+    ];
+    
     protected $bTimestamp = true;
    
     public function page()
@@ -53,5 +64,10 @@ class PageCategoryRepository extends QueryBuilderRepository
     public function page_category_trans()
     {
         return $this->hasMany('CeddyG\ClaraPageBuilder\Repositories\PageCategoryTextRepository', 'fk_page_category', [['fk_lang', '=', ClaraLang::getIdByCode(App::getLocale())]]);
+    }
+    
+    public function getTitlePAgeCategoryAttribute($oItem)
+    {
+        return $oItem->page_category_trans->first()->name_page_category;
     }
 }

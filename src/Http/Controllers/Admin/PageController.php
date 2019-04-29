@@ -25,10 +25,10 @@ class PageController extends ContentManagerController
      *
      * @return \Illuminate\Http\Response
      */
-    public function selectTemplateAjax(Request $oRequest)
+    public function selectLang(Request $oRequest)
     {
         $this->oRepository->setReturnCollection(false);
-        return $this->oRepository->select2($oRequest->all(), [['template', '=', 1]]);
+        return $this->oRepository->select2($oRequest->all(), [['fk_lang', '=', $oRequest->all('fk_lang')]]);
     }
     
     public function showTemplateAjax($iIdTemplate)
@@ -36,5 +36,43 @@ class PageController extends ContentManagerController
         $oPage = $this->oRepository->find($iIdTemplate, ['content_page']);
         
         return new JsonResponse(['content' => $oPage->content_page]);
+    }
+    
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id, Request $oRequest)
+    {
+        if (!$oRequest->is('api/*'))
+        {
+            $oItem = $this->oRepository
+                ->getFillFromView($this->sPath.'/form')
+                ->find($id, ['page_category.id_page_category', 'page_category.title_page_category']);
+
+            $sPageTitle = $this->sName;
+
+            return view($this->sPath.'/form',  compact('oItem','sPageTitle'));
+        }
+        else
+        {
+            $aInput = $oRequest->all();
+            
+            if (array_has($aInput, 'column') && count($aInput['column']) > 0)
+            {
+                $aField = $aInput['column'];
+            }
+            else
+            {
+                $aField = ['*'];
+            }
+            
+            $oItem = $this->oRepository
+                ->find($id, $aField);
+            
+            return response()->json($oItem, 200);
+        }        
     }
 }

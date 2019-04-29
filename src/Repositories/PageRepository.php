@@ -17,6 +17,7 @@ class PageRepository extends QueryBuilderRepository
     
     protected $aRelations = [
         'page_category',
+        'page_trans',
 		'users'
     ];
 
@@ -38,6 +39,11 @@ class PageRepository extends QueryBuilderRepository
     public function page_category()
     {
         return $this->belongsTo('CeddyG\ClaraPageBuilder\Repositories\PageCategoryRepository', 'fk_page_category');
+    }
+   
+    public function page_trans()
+    {
+        return $this->belongsToMany('CeddyG\ClaraPageBuilder\Repositories\PageRepository', 'page_trans', 'fk_page', 'fk_trans');
     }
 
     public function users()
