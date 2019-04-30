@@ -4,9 +4,6 @@ namespace CeddyG\ClaraPageBuilder\Repositories;
 
 use CeddyG\QueryBuilderRepository\QueryBuilderRepository;
 
-use App;
-use ClaraLang;
-
 class PageRepository extends QueryBuilderRepository
 {
     protected $sTable = 'page';
@@ -18,6 +15,7 @@ class PageRepository extends QueryBuilderRepository
     protected $aRelations = [
         'page_category',
         'page_trans',
+        'page_trans_parent',
 		'users'
     ];
 
@@ -44,6 +42,11 @@ class PageRepository extends QueryBuilderRepository
     public function page_trans()
     {
         return $this->belongsToMany('CeddyG\ClaraPageBuilder\Repositories\PageRepository', 'page_trans', 'fk_page', 'fk_trans');
+    }
+   
+    public function page_trans_parent()
+    {
+        return $this->belongsToMany('CeddyG\ClaraPageBuilder\Repositories\PageRepository', 'page_trans', 'fk_trans', 'fk_page');
     }
 
     public function users()

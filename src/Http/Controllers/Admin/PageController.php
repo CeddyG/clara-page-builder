@@ -10,6 +10,8 @@ use CeddyG\ClaraPageBuilder\Repositories\PageRepository;
 
 class PageController extends ContentManagerController
 {
+    protected $sEventBeforeDestroy  = \CeddyG\ClaraPageBuilder\Events\Page\BeforeDestroyEvent::class;
+    
     public function __construct(PageRepository $oRepository)
     {
         $this->sPath            = 'clara-page::admin.page';

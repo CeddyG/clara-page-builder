@@ -25,6 +25,7 @@ class PageBuilderServiceProvider extends ServiceProvider
 		$this->publishesView();
         
         Event::subscribe(\CeddyG\ClaraPageBuilder\Listeners\PageCategoryTextSubscriber::class);
+        Event::subscribe(\CeddyG\ClaraPageBuilder\Listeners\PageSubscriber::class);
     }
     
     /**
