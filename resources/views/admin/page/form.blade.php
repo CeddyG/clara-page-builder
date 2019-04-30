@@ -185,10 +185,14 @@
                                 'field'         => 'page_category_trans.name_page_category'
                         ]) !!}
                     @endif
-
-                    {!! BootForm::select(__('clara-page::page.fk_lang'), 'fk_lang')
-                        ->options($aActivelang)
-                    !!}
+                    
+                    @if (count($aActivelang) > 1)
+                        {!! BootForm::select(__('clara-page::page.fk_lang'), 'fk_lang')
+                            ->options($aActivelang)
+                        !!}
+                    @else
+                        {!! BootForm::hidden('fk_lang')->value(ClaraLang::getIdByCode(App::getLocale())) !!}
+                    @endif
                     
                     {!! BootForm::text(__('clara-page::page.url_page'), 'url_page') !!}
                     {!! BootForm::textarea(__('clara-page::page.description_page'), 'description_page')

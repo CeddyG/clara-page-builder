@@ -1,8 +1,25 @@
 @extends('admin/dashboard')
 
+@php $aActivelang = ClaraLang::getActiveLang() @endphp
+
 @section('CSS')
     <!-- DataTables -->
     {!! Html::style('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') !!}
+    
+    <!-- Select 2 -->
+    {!! Html::style('bower_components/select2/dist/css/select2.min.css') !!}
+    
+    <style>
+        .select2
+        {
+            width: 100% !important
+        }
+        
+        .select2-results__option
+        {
+            height: 32px;
+        }
+    </style>
 @stop
 
 @section('content')
@@ -23,15 +40,38 @@
         <div class="box-body">
             <table id="tab-admin" class="table no-margin table-bordered table-hover">
                 <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>{{ __('clara-page::page.title_page') }}</th>
-                    <th>{{ __('clara-page::page.fk_page_category') }}</th>
-					<th>{{ __('clara-page::page.url_page') }}</th>
-                    <th></th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>{{ __('clara-page::page.title_page') }}</th>
+                        <th>{{ __('clara-page::page.fk_page_category') }}</th>
+                        <th>{{ __('clara-page::page.url_page') }}</th>
+                        @if (count($aActivelang) > 1)
+                        <th>{{ __('clara-page::page.fk_lang') }}</th>
+                        @endif
+                        <th></th>
+                        <th></th>
+                    </tr>
                 </thead>
+                @if (count($aActivelang) > 1)
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>
+                            <select class="select2" data-col="4">
+                                <option value=""></option>
+                                @foreach ($aActivelang as $iIdLang => $sLang)
+                                    <option value="{{ $iIdLang }}">{{ $sLang }}</option>
+                                @endforeach
+                            </select>
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+                @endif
             </table>
         </div>
         <!-- /.box-body -->
@@ -64,6 +104,21 @@
                         'name': 'page_category.page_category_trans.name_page_category'
                     },
 					{ 'data': 'url_page' },
+                    @if (count($aActivelang) > 1)
+					{ 
+                        'data': 'fk_lang',
+                        render: function(data, type, row, meta) {
+                            switch (data)
+                            {
+                                @foreach ($aActivelang as $iIdLang => $sLang)
+                                case {{ $iIdLang }}:
+                                case '{{ $iIdLang }}':
+                                    return '{{ $sLang }}';
+                                @endforeach
+                            }
+                        }
+                    },
+                    @endif
                     {
                         "data": "id_page",
                         "render": function ( data, type, row, meta ) {
@@ -117,5 +172,30 @@
                 }
             });
         } );
+    </script>
+    
+    <!-- Select 2 -->
+    {!! Html::script('bower_components/select2/dist/js/select2.full.min.js') !!}
+    
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                them: 'bootstrap',
+                minimumResultsForSearch: -1
+            });
+            
+            $('.select2').val('').change();
+            
+            $('.select2').on('change', function(){
+                var column = $('#tab-admin').dataTable().api().column($(this).data('col'));
+                var val = $.fn.dataTable.util.escapeRegex(
+                    $(this).val()
+                );
+
+                column
+                    .search(val ? val : '', true, false)
+                    .draw();
+            });
+        });
     </script>
 @endsection
