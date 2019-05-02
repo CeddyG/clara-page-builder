@@ -50,8 +50,7 @@ class PageCategoryRepository extends QueryBuilderRepository
             'CeddyG\ClaraPageBuilder\Repositories\PageRepository', 
             'fk_page_category', 
             [
-                'enable_page' => 1,
-                'template' => 0,
+                'enable_page' => 1
             ]
         );
     }
