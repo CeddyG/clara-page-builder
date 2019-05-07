@@ -53,4 +53,11 @@ class PageRepository extends QueryBuilderRepository
     {
         return $this->belongsTo('CeddyG\ClaraSentinel\Repositories\UsersRepository', 'fk_users');
     }
+    
+    public function getContentPageAttribute($oItem)
+    {
+        return config('clara.page.bootstrap', 3) == 4
+            ? str_replace('col-xs-', 'col-', $oItem->content_page)
+            : $oItem->content_page;            
+    }
 }
