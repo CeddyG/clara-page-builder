@@ -32,6 +32,20 @@ class PageRepository extends QueryBuilderRepository
         'js_page'
     ];
     
+    /**
+     * List of the customs attributes.
+     * 
+     * @var array
+     */
+    protected $aCustomAttribute = [
+        'lang' => [
+            'fk_lang',
+            'url_page',
+            'page_trans.fk_lang',
+            'page_trans.url_page'
+        ]
+    ];
+    
     protected $bTimestamp = true;    
    
     public function page_category()
@@ -56,8 +70,28 @@ class PageRepository extends QueryBuilderRepository
     
     public function getContentPageAttribute($oItem)
     {
-        return config('clara.page.bootstrap', 3) == 4
-            ? str_replace('col-xs-', 'col-', $oItem->content_page)
-            : $oItem->content_page;            
+        if (config('clara.page.bootstrap', 3) == 4)
+        {
+            $oItem->content_page = str_replace('col-xs-', 'col-', $oItem->content_page);
+            
+            $oItem->content_page = str_replace('col-xs-offset', 'offset', $oItem->content_page);
+            $oItem->content_page = str_replace('col-sm-offset', 'offset-sm', $oItem->content_page);
+            $oItem->content_page = str_replace('col-md-offset', 'offset-md', $oItem->content_page);
+            $oItem->content_page = str_replace('col-lg-offset', 'offset-lg', $oItem->content_page);
+        }
+        
+        return $oItem->content_page;            
+    }
+    
+    public function getLangAttribute($oItem)
+    {
+        $aLangs[config('clara.lang.iso')[$oItem->fk_lang]] = $oItem->url_page;
+        
+        foreach ($oItem->page_trans as $oPage)
+        {
+            $aLangs[config('clara.lang.iso')[$oPage->fk_lang]] = $oPage->url_page;
+        }
+        
+        return $aLangs;
     }
 }
