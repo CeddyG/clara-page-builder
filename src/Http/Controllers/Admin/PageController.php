@@ -52,7 +52,13 @@ class PageController extends ContentManagerController
         {
             $oItem = $this->oRepository
                 ->getFillFromView($this->sPath.'/form')
-                ->find($id, ['page_category.id_page_category', 'page_category.title_page_category']);
+                ->find($id, [
+                    'page_category.id_page_category', 
+                    'page_category.title_page_category', 
+                    'page_trans.fk_lang',
+                    'page_trans.title_page'
+                ]
+            );
 
             $sPageTitle = $this->sName;
 
