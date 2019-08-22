@@ -24,6 +24,7 @@ class PageRepository extends QueryBuilderRepository
         'fk_users',
         'fk_lang',
         'title_page',
+        'meta_title_page',
         'url_page',
         'enable_page',
         'content_page',

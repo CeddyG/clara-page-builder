@@ -4,6 +4,7 @@ namespace CeddyG\ClaraPageBuilder\Http\Controllers\Admin;
 
 use CeddyG\Clara\Http\Controllers\ContentManagerController;
 
+use Illuminate\Http\Request;
 use CeddyG\ClaraPageBuilder\Repositories\PageCategoryRepository;
 
 class PageCategoryController extends ContentManagerController
@@ -22,5 +23,43 @@ class PageCategoryController extends ContentManagerController
         
         $this->oRepository  = $oRepository;
         $this->sRequest     = 'CeddyG\ClaraPageBuilder\Http\Requests\PageCategoryRequest';
+    }
+    
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id, Request $oRequest)
+    {
+        if (!$oRequest->is('api/*'))
+        {
+            $oItem = $this->oRepository
+                ->getFillFromView($this->sPath.'/form', ['page'])
+                ->find($id);
+
+            $sPageTitle = $this->sName;
+
+            return view($this->sPath.'/form',  compact('oItem','sPageTitle'));
+        }
+        else
+        {
+            $aInput = $oRequest->all();
+            
+            if (array_has($aInput, 'column') && count($aInput['column']) > 0)
+            {
+                $aField = $aInput['column'];
+            }
+            else
+            {
+                $aField = ['*'];
+            }
+            
+            $oItem = $this->oRepository
+                ->find($id, $aField);
+            
+            return response()->json($oItem, 200);
+        }        
     }
 }

@@ -195,11 +195,6 @@
                     @endif
                     
                     {!! BootForm::text(__('clara-page::page.url_page'), 'url_page') !!}
-                    {!! BootForm::textarea(__('clara-page::page.description_page'), 'description_page')
-                        ->attribute('maxlength', 300)
-                        ->helpBlock('<span id="count_message">0/300</span>') 
-                    !!}
-                    
                     {!! BootForm::yesNo(__('clara-page::page.enable_page'), 'enable_page') !!}
                     {!! BootForm::select(__('clara-page::page.from-template'), 'from-template')
                         ->class('select2 form-control')
@@ -218,8 +213,8 @@
             </div>
         </div>
         
-        @if (count($aActivelang) > 1)
-            <div class="col-sm-6">
+        <div class="col-sm-6">
+            @if (count($aActivelang) > 1)
                 <div class="box box-success">	
                     <div class="box-header with-border">
                         <h3 class="box-title">{{ __('clara-page::page.multilingual') }}</h3>
@@ -257,8 +252,24 @@
                         @endforeach
                     </div>
                 </div>
+            @endif
+            
+            <div class="box box-primary">	
+                <div class="box-header with-border">
+                    <h3 class="box-title">Meta (SEO)</h3>
+                </div>
+                <div class="box-body">
+                    {!! BootForm::text(__('clara-page::page.title_page'), 'meta_title_page')
+                        ->attribute('maxlength', 300)
+                        ->helpBlock('<span id="count_message_meta">0/70</span>')
+                    !!}
+                    {!! BootForm::textarea(__('clara-page::page.description_page'), 'description_page')
+                        ->attribute('maxlength', 300)
+                        ->helpBlock('<span id="count_message">0/300</span>') 
+                    !!}
+                </div>
             </div>
-        @endif
+        </div>
     </div>
       
     <div class="row">
@@ -678,6 +689,13 @@
 
             $('#description_page').keyup(function() {
                 $('#count_message').html($('#description_page').val().length+'/300');
+            });
+            
+            //Counter for the description field
+            $('#count_message_meta').html($('#meta_title_page').val().length+'/70');
+
+            $('#meta_title_page').keyup(function() {
+                $('#count_message_meta').html($('#meta_title_page').val().length+'/70');
             });
         });    
     </script>

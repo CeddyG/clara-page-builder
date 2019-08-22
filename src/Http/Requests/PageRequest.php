@@ -43,6 +43,7 @@ class PageRequest extends FormRequest
             'fk_users' => 'numeric',
             'fk_lang' => 'numeric',
             'title_page' => 'string|max:150',
+            'meta_title_page' => 'string|max:70',
             'url_page' => 'string|max:255',
             'enable_page' => 'numeric',
             'content_page' => '',
