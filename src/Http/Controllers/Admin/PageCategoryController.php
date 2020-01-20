@@ -4,6 +4,7 @@ namespace CeddyG\ClaraPageBuilder\Http\Controllers\Admin;
 
 use CeddyG\Clara\Http\Controllers\ContentManagerController;
 
+use Arr;
 use Illuminate\Http\Request;
 use CeddyG\ClaraPageBuilder\Repositories\PageCategoryRepository;
 
@@ -47,7 +48,7 @@ class PageCategoryController extends ContentManagerController
         {
             $aInput = $oRequest->all();
             
-            if (array_has($aInput, 'column') && count($aInput['column']) > 0)
+            if (Arr::has($aInput, 'column') && count($aInput['column']) > 0)
             {
                 $aField = $aInput['column'];
             }
