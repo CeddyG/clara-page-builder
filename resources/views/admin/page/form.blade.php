@@ -944,14 +944,20 @@
             
             $('#from-template').on('change', function(){
                 var sRoute = '{{ route('api.admin.page.select-template.show', 'dummyId') }}';
-                sRoute = sRoute.replace('dummyId', $(this).val());
+                sRoute = sRoute.replace('dummyId', $(this).val());                
                 
-                $.get(sRoute, function( data ) {
+                $.ajax({
+                    url: sRoute,
+                    dataType: 'json',
+                    headers: {
+                        "Authorization": "Bearer {{ Sentinel::getUser()->api_token }}"
+                    }
+                }).done(function(data) {
                     $('#content-zone').html(data.content);
                     $('#content_page').html(data.content);
                     
                     initContent();
-                }, 'json');
+                });
             });
             
             initContent();
